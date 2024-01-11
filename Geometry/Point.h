@@ -8,9 +8,9 @@ public:
 	Point(const std::string& name, double x, double y);
 	virtual ~Point() = default;
 	void setX(double x);
-	double getX() const;
+	double x() const;
 	void setY(double y);
-	double getY() const;
+	double y() const;
 private:
 	double m_x;
 	double m_y;

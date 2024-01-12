@@ -44,6 +44,23 @@ double Point::distance(const Point& other) const
 	return hypot(m_x - other.m_x, m_y - other.m_y);
 }
 
+bool Point::operator==(const Point& other) const
+{
+	return std::is_eq(*this <=> other);
+}
+
+std::partial_ordering Point::operator<=>(const Point& other) const
+{
+	auto cmp = m_x <=> other.m_x;
+	if (cmp == std::partial_ordering::equivalent) {
+		cmp = m_y <=> other.m_y;
+		if (cmp == std::partial_ordering::equivalent) {
+			cmp = name() <=> other.name();
+		}
+	}
+	return cmp;
+}
+
 void Point::translate(double deltaX, double deltaY)
 {
 	m_x += deltaX;

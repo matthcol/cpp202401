@@ -17,6 +17,9 @@ public:
 	void translate(double deltaX, double deltaY) override;
 
 	double distance(const Point& other) const;
+
+	bool operator==(const Point& other) const;
+	std::partial_ordering operator<=>(const Point& other) const;
 private:
 	double m_x;
 	double m_y;

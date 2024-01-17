@@ -14,6 +14,7 @@
 
 #include "Point.h"
 #include "display.h"
+#include "PointT.h"
 
 void playWithPoints() {
     Point p0; // default constructor
@@ -502,6 +503,28 @@ void demoArray() {
     display(points2.cbegin(), points2.cend(), [](auto point_ptr) {return point_ptr->x(); });
 }
 
+void playWithGenericPoints() {
+    PointT<double> pointD("A", 3.4, 4.5);
+    PointT<float> pointF("B", 3.4f, 4.5f);
+    PointT<int> pointI("C", 3, 4);
+    PointT<int> pointI2("D", 7, 7);
+    std::cout << "point with double coords: " << pointD.toString() << std::endl
+        << "point with float coords: " << pointF.toString() << std::endl
+        << "point with int coords: " << pointI.toString() << std::endl;
+    std::vector<Form*> points{ &pointD, &pointF, &pointI, &pointI2 };
+    for (auto point_ptr : points) {
+        point_ptr->translate(1.4, -1.3);
+        std::cout << point_ptr->toString() << " ; ";
+    }
+    std::cout << std::endl;
+    double d = pointI.distance(pointI2);
+    std::cout << "distance: " << d << std::endl;
+
+    double d2 = pointI.distance(pointF);
+    std::cout << "distance: " << d2 << std::endl;
+
+}
+
 int main()
 {
     // playWithPoints();
@@ -512,6 +535,7 @@ int main()
     // mapReduce_cpp20_ranges();
     // compare_points_cpp20();
     // moveDemo();
-    demoArray();
+    // demoArray();
+    playWithGenericPoints();
     return 0;
 }

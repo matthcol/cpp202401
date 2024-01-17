@@ -3,6 +3,7 @@
 
 #include "Form.h"
 
+
 /**
 * T: type of coordinates x, y (numeric type)
 */
@@ -11,7 +12,9 @@ class PointT : public Form
 {
 public:
 	PointT() = default; //: PointT("", 0.0, 0.0);
-	PointT(const std::string& name, T x, T y):Form(name), m_x(x), m_y(y)
+	PointT(const std::string& name, T x, T y): Form(name), m_x(x), m_y(y) {
+
+	}
 	virtual ~PointT() = default;
 	void setX(T x) {
 		m_x = x;
@@ -32,13 +35,20 @@ public:
 	}
 
 	void translate(double deltaX, double deltaY) override {
-		m_x += deltaX;
-		m_y += deltaY;
+		m_x += static_cast<T>(deltaX);
+		m_y += static_cast<T>(deltaY);
 	}
 
-	double distance(const Point& other) const {
+	double distance(const PointT<T>& other) const {
 		double deltaX = m_x - other.m_x; // need operator- on type T and conversion to type double
 		double deltaY = m_y - other.m_y;
+		return hypot(deltaX, deltaY);
+	}
+
+	template<class U> 
+	double distance(const PointT<U>& other) const {
+		double deltaX = static_cast<double>(m_x) - static_cast<double>(other.x());
+		double deltaY = static_cast<double>(m_y) - static_cast<double>(other.y());
 		return hypot(deltaX, deltaY);
 	}
 

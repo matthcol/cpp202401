@@ -137,6 +137,7 @@
     <ClInclude Include="display.h" />
     <ClInclude Include="Form.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="PointT.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

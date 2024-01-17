@@ -6,7 +6,7 @@ class Point: public Form
 public:
 	Point();
 	Point(const std::string& name, double x, double y);
-	virtual ~Point() = default;
+	virtual ~Point();
 	void setX(double x);
 	double x() const;
 	void setY(double y);

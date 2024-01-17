@@ -11,6 +11,11 @@ Point::Point(const std::string& name, double x, double y): Form(name), m_x(x), m
 {
 }
 
+Point::~Point()
+{
+	std::clog << "Point destroyed:" << *this << std::endl;
+}
+
 void Point::setX(double x)
 {
 	m_x = x;

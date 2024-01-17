@@ -546,6 +546,9 @@ void playWithAllForms() {
     for (auto form_ptr : forms) {
         std::cout << "\t - " << form_ptr->toString() << std::endl;
         // print perimeter/surface only for IMesurable2D forms
+        // NB: downcasting or sidecasting
+        // classic pointer(*) or reference(&): dynamic_cast
+        // share_ptr: std::dynamic_pointer_cast
         if (auto mesurable_ptr = std::dynamic_pointer_cast<IMesurable2D>(form_ptr); mesurable_ptr != nullptr) {
             std::cout << "\t\t* perimeter: " << mesurable_ptr->perimeter() << std::endl
                 << "\t\t* surface: " << mesurable_ptr->surface() << std::endl;

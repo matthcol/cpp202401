@@ -129,15 +129,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Form.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="IMesurable2D.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Polygon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="Form.h" />
+    <ClInclude Include="IMesurable2D.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PointT.h" />
+    <ClInclude Include="Polygon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

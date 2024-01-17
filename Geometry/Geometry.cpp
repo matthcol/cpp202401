@@ -11,10 +11,13 @@
 #include <random>
 #include <numeric>
 #include <tuple>
+#include <memory>
 
 #include "Point.h"
 #include "display.h"
 #include "PointT.h"
+#include "Circle.h"
+#include "Polygon.h"
 
 void playWithPoints() {
     Point p0; // default constructor
@@ -525,6 +528,32 @@ void playWithGenericPoints() {
 
 }
 
+void playWithAllForms() {
+    std::shared_ptr<Point> ptA_ptr(new Point("A", 3.5, 4.75));
+    std::shared_ptr<Point> ptB_ptr(new Point("B", 12.5, 4.75));
+    std::shared_ptr<Point> ptD_ptr(new Point("D", 12.5, 14.75));
+    std::shared_ptr<Point> ptE_ptr = std::make_shared<Point>("E", 3.5, 14.75);
+    std::shared_ptr<Circle> circleC_ptr(new Circle("C", ptA_ptr, 10.0));
+    std::shared_ptr<Polygon> polyABC_ptr(new Polygon("ABC", {ptA_ptr, ptB_ptr, ptD_ptr}));
+    std::shared_ptr<Polygon> polyABCD_ptr(new Polygon("ABCD", { ptA_ptr, ptB_ptr, ptD_ptr, ptE_ptr }));
+
+    std::cout << "circle: " << circleC_ptr->toString() << std::endl
+        << "\t- perimeter: " << circleC_ptr->perimeter() << std::endl
+        << "\t- surface: " << circleC_ptr->surface() << std::endl;
+
+    std::vector<std::shared_ptr<Form>> forms{ ptA_ptr, ptB_ptr, ptD_ptr, ptE_ptr, circleC_ptr, polyABC_ptr, polyABCD_ptr };
+    std::cout << std::endl << "Forms:" << std::endl;
+    for (auto form_ptr : forms) {
+        std::cout << "\t - " << form_ptr->toString() << std::endl;
+        // print perimeter/surface only for IMesurable2D forms
+        if (auto mesurable_ptr = std::dynamic_pointer_cast<IMesurable2D>(form_ptr); mesurable_ptr != nullptr) {
+            std::cout << "\t\t* perimeter: " << mesurable_ptr->perimeter() << std::endl
+                << "\t\t* surface: " << mesurable_ptr->surface() << std::endl;
+
+        }
+    }
+}
+
 int main()
 {
     // playWithPoints();
@@ -536,6 +565,7 @@ int main()
     // compare_points_cpp20();
     // moveDemo();
     // demoArray();
-    playWithGenericPoints();
+    // playWithGenericPoints();
+    playWithAllForms();
     return 0;
 }

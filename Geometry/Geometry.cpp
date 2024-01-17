@@ -496,7 +496,10 @@ void demoArray() {
     display(points2.cbegin(), points2.cend(), [](Point* point_pt) {return *point_pt; });
     
     // display x coord of each point in points
+    display(points.cbegin(), points.cend(), [](const Point& point) {return point.x(); });
+    display(points.cbegin(), points.cend(), [](auto& point) {return point.x(); });
     // display x coord of each point in points2
+    display(points2.cbegin(), points2.cend(), [](auto point_ptr) {return point_ptr->x(); });
 }
 
 int main()

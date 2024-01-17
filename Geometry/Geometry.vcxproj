@@ -134,6 +134,7 @@
     <ClCompile Include="Point.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="display.h" />
     <ClInclude Include="Form.h" />
     <ClInclude Include="Point.h" />
   </ItemGroup>

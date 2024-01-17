@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Point.h"
 #include <vector>
 #include <set>
 #include <list>
+#include <array>
 #include <functional>
 #include <memory>
 #include <iterator>
@@ -12,6 +12,8 @@
 #include <numeric>
 #include <tuple>
 
+#include "Point.h"
+#include "display.h"
 
 void playWithPoints() {
     Point p0; // default constructor
@@ -456,6 +458,47 @@ void moveDemo() {
     // std::cout << "After move: " << p << std::endl;
 }
 
+void demoArray() {
+    std::array<double, 4> temperatures{ 12.5, 34.4,-12.0, 2.4 };
+    std::array<Point, 2> points{
+        Point("B", 1.5, 5.4),
+        Point("C", -1.5, 5.4)
+    };
+    std::array<Point*, 2> points2{
+        new Point("B", 1.5, 5.4),
+        new Point("C", -1.5, 5.4)
+    };
+    // following templateusage does not compile:
+    //std::array<Point&, 2> points3{
+    //   points[0],
+    //   points[1]
+    //};
+    std::array<std::reference_wrapper<Point>, 2> points3{
+       points[0],
+       points[1]
+    };
+    for (auto temperature : temperatures) { // foreach C++11
+        std::cout << "\t-" << temperature << std::endl;
+    }
+    for (size_t i = 0; i < temperatures.size(); i++) { // for C
+        auto temperature = temperatures[i];
+        std::cout << "\t*" << temperature << std::endl;
+    }
+
+    // display(temperatures.cbegin(), temperatures.cend()); // OK for InputIy, KO for T
+    display<double>(temperatures.cbegin(), temperatures.cend()); // T=double
+    display<double, std::array<double,4>::const_iterator>(temperatures.cbegin(), temperatures.cend());
+
+    display<Point>(points.cbegin(), points.cend());
+    display<Point*>(points2.cbegin(), points2.cend());
+    display<std::reference_wrapper<Point>>(points3.cbegin(), points3.cend());
+
+    display(points2.cbegin(), points2.cend(), [](Point* point_pt) {return *point_pt; });
+    
+    // display x coord of each point in points
+    // display x coord of each point in points2
+}
+
 int main()
 {
     // playWithPoints();
@@ -465,6 +508,7 @@ int main()
     // demo_cpp20_formatting();
     // mapReduce_cpp20_ranges();
     // compare_points_cpp20();
-    moveDemo();
+    // moveDemo();
+    demoArray();
     return 0;
 }

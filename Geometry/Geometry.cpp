@@ -508,10 +508,12 @@ void playWithGenericPoints() {
     PointT<float> pointF("B", 3.4f, 4.5f);
     PointT<int> pointI("C", 3, 4);
     PointT<int> pointI2("D", 7, 7);
+    PointT<int> pointI3;
+    PointT<double> pointD2;
     std::cout << "point with double coords: " << pointD.toString() << std::endl
         << "point with float coords: " << pointF.toString() << std::endl
         << "point with int coords: " << pointI.toString() << std::endl;
-    std::vector<Form*> points{ &pointD, &pointF, &pointI, &pointI2 };
+    std::vector<Form*> points{ &pointD, &pointF, &pointI, &pointI2, &pointI3, &pointD2 };
     for (auto point_ptr : points) {
         point_ptr->translate(1.4, -1.3);
         std::cout << point_ptr->toString() << " ; ";

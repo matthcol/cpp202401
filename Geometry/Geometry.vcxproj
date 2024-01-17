@@ -139,6 +139,9 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="PointT.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="PointT.tpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

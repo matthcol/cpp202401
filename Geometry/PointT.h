@@ -11,39 +11,21 @@ template<class T>
 class PointT : public Form
 {
 public:
-	PointT() = default; //: PointT("", 0.0, 0.0);
-	PointT(const std::string& name, T x, T y): Form(name), m_x(x), m_y(y) {
-
-	}
+	PointT();
+	PointT(const std::string& name, T x, T y);
 	virtual ~PointT() = default;
-	void setX(T x) {
-		m_x = x;
-	}
-	T x() const {
-		return m_x;
-	}
-	void setY(T y) {
-		m_y = y;
-	}
-	T y() const {
-		return m_y;
-	}
+	
+	void setX(T x);
+	T x() const;
+	void setY(T y);
+	T y() const;
 
 	// from Form
-	virtual std::string toString() const override {
-		return std::format("{0}({1}, {2})", name(), m_x, m_y);
-	}
+	virtual std::string toString() const override;
 
-	void translate(double deltaX, double deltaY) override {
-		m_x += static_cast<T>(deltaX);
-		m_y += static_cast<T>(deltaY);
-	}
+	void translate(double deltaX, double deltaY) override;
 
-	double distance(const PointT<T>& other) const {
-		double deltaX = m_x - other.m_x; // need operator- on type T and conversion to type double
-		double deltaY = m_y - other.m_y;
-		return hypot(deltaX, deltaY);
-	}
+	double distance(const PointT<T>& other) const;
 
 	template<class U> 
 	double distance(const PointT<U>& other) const {
@@ -57,5 +39,5 @@ private:
 	T m_y;
 };
 
-//#include "PointT.tpp"
+#include "PointT.tpp"
 
